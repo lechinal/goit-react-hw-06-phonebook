@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactSlice';
 
 export default function ContactForm({ onAddContact, contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
   const handleNameChange = event => {
     setName(event.target.value);
@@ -36,7 +40,8 @@ export default function ContactForm({ onAddContact, contacts }) {
       return;
     }
 
-    onAddContact(name, number);
+    dispatch(addContact({ name, number }));
+
     setName('');
     setNumber('');
 
@@ -73,14 +78,14 @@ export default function ContactForm({ onAddContact, contacts }) {
   );
 }
 
-// PropTypes
+// // PropTypes
 
-ContactForm.propTypes = {
-  onAddContact: PropTypes.func.isRequired,
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+// ContactForm.propTypes = {
+//   onAddContact: PropTypes.func.isRequired,
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+// };
