@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
-// import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactSlice';
@@ -25,8 +25,8 @@ export default function ContactForm({ onAddContact, contacts }) {
   };
 
   const handleAddClick = () => {
-    if (name.trim() === '') {
-      alert('Please enter the name of the contact!');
+    if (name.trim() === '' || number.trim() === '') {
+      alert('Please enter both name and number for the contact!');
       return;
     }
 
@@ -39,13 +39,17 @@ export default function ContactForm({ onAddContact, contacts }) {
       alert(`"${name}" is already in contacts`);
       return;
     }
-
-    dispatch(addContact({ name, number }));
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(newContact));
 
     setName('');
     setNumber('');
 
-    const updatedContacts = [...contacts, { name, number }];
+    const updatedContacts = [...contacts, newContact];
     localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
