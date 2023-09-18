@@ -25,3 +25,7 @@
 .inputContact {
   height: 25px;
 }
+
+label {
+  text-align: center;
+}

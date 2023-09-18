@@ -65,7 +65,7 @@ export const App = () => {
         <ContactForm onAddContact={handleAddContact} contacts={contacts} />
       </Paper>
       <Paper>
-        <h2>Contacts</h2>
+        <h2 style={{ textAlign: 'center' }}>Contacts</h2>
         <Filter filter={filter} onFilterChange={setFilter} />
         <ContactList
           contacts={contacts.filter(contact =>
