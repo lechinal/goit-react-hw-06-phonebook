@@ -3,7 +3,6 @@ import styles from './ContactList.module.css';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contactSlice';
-import { setFilter } from '../../redux/filterSlice';
 
 export default function ContactList() {
   const contacts = useSelector(state => state.contacts.contacts);
